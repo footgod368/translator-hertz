@@ -27,10 +27,11 @@ import (
 func main() {
 	h := server.Default()
 	register(h)
+	Init()
 	h.Spin()
 }
 
-func init() {
+func Init() {
 	// 初始化数据库
 	dal.Init()
 	// 初始化日志
