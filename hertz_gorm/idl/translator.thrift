@@ -23,6 +23,15 @@ struct TranslateResponse {
     6: list<EGSentence> eg_sentences
 }
 
+struct CompleteRequest {
+    1: string prefix
+}
+
+struct CompleteResponse {
+    1: list<string> suggestions
+}
+
 service TranslatorService {
     TranslateResponse TranslateText(1: TranslateRequest req) (api.get="/v1/translate")
+    CompleteResponse Complete(1: CompleteRequest req) (api.get="/v1/complete")
 }

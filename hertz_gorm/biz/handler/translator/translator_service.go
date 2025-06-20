@@ -9,13 +9,11 @@ import (
 	"github.com/cloudwego/hertz-examples/bizdemo/hertz_gorm/biz/service"
 
 	"github.com/cloudwego/hertz/pkg/app"
-	"github.com/cloudwego/hertz/pkg/common/hlog"
 )
 
 // TranslateText .
 // @router /v1/translate [GET]
 func TranslateText(ctx context.Context, c *app.RequestContext) {
-	hlog.CtxInfof(ctx, "Received translate request: %s", c.Request.Body())
 	var err error
 	var req translator.TranslateRequest
 	err = c.BindAndValidate(&req)
@@ -29,6 +27,25 @@ func TranslateText(ctx context.Context, c *app.RequestContext) {
 
 	// 翻译
 	resp, err := service.Translate(ctx, req)
+	if err != nil {
+		c.String(500, err.Error())
+		return
+	}
+	c.JSON(200, resp)
+}
+
+// Complete .
+// @router /v1/complete [GET]
+func Complete(ctx context.Context, c *app.RequestContext) {
+	var err error
+	var req translator.CompleteRequest
+	err = c.BindAndValidate(&req)
+	if err != nil {
+		c.String(400, err.Error())
+		return
+	}
+
+	resp, err := service.Complete(ctx, req)
 	if err != nil {
 		c.String(500, err.Error())
 		return

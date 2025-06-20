@@ -20,6 +20,7 @@ func Register(r *server.Hertz) {
 	root := r.Group("/", rootMw()...)
 	{
 		_v1 := root.Group("/v1", _v1Mw()...)
+		_v1.GET("/complete", append(_completeMw(), translator.Complete)...)
 		_v1.GET("/translate", append(_translatetextMw(), translator.TranslateText)...)
 	}
 }

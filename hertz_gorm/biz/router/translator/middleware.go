@@ -20,3 +20,8 @@ func _translatetextMw() []app.HandlerFunc {
 	// your code...
 	return nil
 }
+
+func _completeMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
