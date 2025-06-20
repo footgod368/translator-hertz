@@ -20,6 +20,7 @@ package main
 
 import (
 	"github.com/cloudwego/hertz-examples/bizdemo/hertz_gorm/biz/dal"
+	"github.com/cloudwego/hertz-examples/bizdemo/hertz_gorm/biz/llm"
 	"github.com/cloudwego/hertz-examples/bizdemo/hertz_gorm/biz/service"
 	"github.com/cloudwego/hertz-examples/bizdemo/hertz_gorm/log"
 	"github.com/cloudwego/hertz/pkg/app/server"
@@ -36,4 +37,5 @@ func Init() {
 	dal.Init()
 	log.Init()
 	service.Init()
+	llm.Init()
 }
