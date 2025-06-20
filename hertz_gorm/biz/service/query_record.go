@@ -17,3 +17,8 @@ func CreateQueryRecord(ctx context.Context, word string, ipAddress string, userA
 	}
 	return mysql.CreateQueryRecord(ctx, queryRecord)
 }
+
+func CountQueryRecordsToday(ctx context.Context) (int64, error) {
+	today := time.Now().Format("2006-01-02")
+	return mysql.CountQueryRecords(ctx, "date(timestamp) = ?", today)
+}

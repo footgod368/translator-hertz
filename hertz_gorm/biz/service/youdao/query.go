@@ -9,10 +9,10 @@ import (
 	"net/http"
 )
 
-const YouDaoAPIURL = "http://dict.youdao.com/jsonapi"
+const apiURL = "http://dict.youdao.com/jsonapi"
 
 func Query(ctx context.Context, text string) (*YouDaoResponse, error) {
-	response, err := http.Get(utils.AppendURLParams(YouDaoAPIURL, map[string]string{"q": text}))
+	response, err := http.Get(utils.AppendURLParams(apiURL, map[string]string{"q": text}))
 	if err != nil {
 		return nil, err
 	}

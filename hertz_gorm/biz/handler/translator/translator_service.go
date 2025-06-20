@@ -53,3 +53,22 @@ func Complete(ctx context.Context, c *app.RequestContext) {
 	}
 	c.JSON(200, resp)
 }
+
+// DuckSay .
+// @router /v1/duck_say [GET]
+func DuckSay(ctx context.Context, c *app.RequestContext) {
+	var err error
+	var req translator.DuckSayRequest
+	err = c.BindAndValidate(&req)
+	if err != nil {
+		c.String(400, err.Error())
+		return
+	}
+
+	resp, err := service.DuckSay(ctx, req)
+	if err != nil {
+		c.String(500, err.Error())
+		return
+	}
+	c.JSON(200, resp)
+}
