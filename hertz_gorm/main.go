@@ -19,21 +19,15 @@
 package main
 
 import (
-	"os"
-
 	"github.com/cloudwego/hertz-examples/bizdemo/hertz_gorm/biz/dal"
+	"github.com/cloudwego/hertz-examples/bizdemo/hertz_gorm/log"
 	"github.com/cloudwego/hertz/pkg/app/server"
-	"github.com/cloudwego/hertz/pkg/common/hlog"
 )
 
 func main() {
-	// 初始化日志
-	f, _ := os.Create("./log/app.log")
-	defer f.Close()
-	hlog.SetOutput(f)
-
 	h := server.Default()
 	dal.Init()
+	log.Init()
 	register(h)
 	h.Spin()
 }

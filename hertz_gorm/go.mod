@@ -6,6 +6,7 @@ replace github.com/apache/thrift => github.com/apache/thrift v0.13.0
 
 require (
 	github.com/apache/thrift v0.21.0
+	github.com/bytedance/gg v1.0.0
 	github.com/cloudwego/hertz v0.10.0
 	github.com/hertz-contrib/gzip v0.0.3
 	gorm.io/driver/mysql v1.5.7
