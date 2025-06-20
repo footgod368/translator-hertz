@@ -32,8 +32,6 @@ func main() {
 }
 
 func Init() {
-	// 初始化数据库
 	dal.Init()
-	// 初始化日志
 	log.Init()
 }
