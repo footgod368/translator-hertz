@@ -1,11 +1,11 @@
 version: '3'
 
-# Remove the version line at top
 services:
   mysql:
     image: mysql:latest
     volumes:
       - ./biz/model/sql:/docker-entrypoint-initdb.d
+      - mysql_data:/var/lib/mysql
     ports:
       - 9910:3306
     environment:
@@ -13,3 +13,6 @@ services:
       - MYSQL_USER=gorm
       - MYSQL_PASSWORD=gorm
       - MYSQL_RANDOM_ROOT_PASSWORD="yes"
+
+volumes:
+  mysql_data:
