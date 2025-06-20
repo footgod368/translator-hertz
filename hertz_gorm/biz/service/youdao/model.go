@@ -150,22 +150,11 @@ type YouDaoResponse struct {
 			Url  string `json:"url"`
 		} `json:"source"`
 		Word []struct {
-			Usphone  string `json:"usphone"`
-			Ukphone  string `json:"ukphone"`
-			Ukspeech string `json:"ukspeech"`
-			Trs      []struct {
-				Tr []struct {
-					L struct {
-						I []string `json:"i"`
-					} `json:"l"`
-				} `json:"tr"`
-			} `json:"trs"`
-			Wfs []struct {
-				Wf struct {
-					Name  string `json:"name"`
-					Value string `json:"value"`
-				} `json:"wf"`
-			} `json:"wfs"`
+			Usphone      string        `json:"usphone"`
+			Ukphone      string        `json:"ukphone"`
+			Ukspeech     string        `json:"ukspeech"`
+			Trs          []Translation `json:"trs"`
+			Wfs          []WordFrom    `json:"wfs"`
 			ReturnPhrase struct {
 				L struct {
 					I string `json:"i"`
@@ -210,50 +199,10 @@ type YouDaoResponse struct {
 		} `json:"word"`
 	} `json:"ee"`
 	BlngSentsPart struct {
-		SentenceCount int `json:"sentence-count"`
-		SentencePair  []struct {
-			Sentence            string `json:"sentence"`
-			SentenceEng         string `json:"sentence-eng"`
-			SentenceTranslation string `json:"sentence-translation"`
-			SpeechSize          string `json:"speech-size"`
-			AlignedWords        struct {
-				Src struct {
-					Chars []struct {
-						S      string `json:"@s"`
-						E      string `json:"@e"`
-						Aligns struct {
-							Sc []struct {
-								Id string `json:"@id"`
-							} `json:"sc"`
-							Tc []struct {
-								Id string `json:"@id"`
-							} `json:"tc"`
-						} `json:"aligns"`
-						Id string `json:"@id"`
-					} `json:"chars"`
-				} `json:"src"`
-				Tran struct {
-					Chars []struct {
-						S      string `json:"@s"`
-						E      string `json:"@e"`
-						Aligns struct {
-							Sc []struct {
-								Id string `json:"@id"`
-							} `json:"sc"`
-							Tc []struct {
-								Id string `json:"@id"`
-							} `json:"tc"`
-						} `json:"aligns"`
-						Id string `json:"@id"`
-					} `json:"chars"`
-				} `json:"tran"`
-			} `json:"aligned-words"`
-			Source         string `json:"source"`
-			Url            string `json:"url"`
-			SentenceSpeech string `json:"sentence-speech"`
-		} `json:"sentence-pair"`
-		More        string `json:"more"`
-		TrsClassify []struct {
+		SentenceCount int              `json:"sentence-count"`
+		SentencePair  []EgSentencePair `json:"sentence-pair"`
+		More          string           `json:"more"`
+		TrsClassify   []struct {
 			Proportion string `json:"proportion"`
 			Tr         string `json:"tr"`
 		} `json:"trs-classify"`
@@ -421,13 +370,7 @@ type YouDaoResponse struct {
 				Url    string `json:"url"`
 				Desc   string `json:"desc"`
 			} `json:"en"`
-			Zh []struct {
-				Source string `json:"source"`
-				Word   string `json:"word"`
-				Value  string `json:"value"`
-				Url    string `json:"url"`
-				Desc   string `json:"desc"`
-			} `json:"zh"`
+			Zh []EtymologyZh `json:"zh"`
 		} `json:"etyms"`
 		Word string `json:"word"`
 	} `json:"etym"`
@@ -512,4 +455,69 @@ type YouDaoResponse struct {
 	OxfordAdvance struct {
 		EncryptedData string `json:"encryptedData"`
 	} `json:"oxfordAdvance"`
+}
+
+type Translation struct {
+	Tr []struct {
+		L struct {
+			I []string `json:"i"`
+		} `json:"l"`
+	} `json:"tr"`
+}
+
+type WordFrom struct {
+	Wf struct {
+		Name  string `json:"name"`
+		Value string `json:"value"`
+	} `json:"wf"`
+}
+
+type EtymologyZh struct {
+	Source string `json:"source"`
+	Word   string `json:"word"`
+	Value  string `json:"value"`
+	Url    string `json:"url"`
+	Desc   string `json:"desc"`
+}
+
+type EgSentencePair struct {
+	Sentence            string `json:"sentence"`
+	SentenceEng         string `json:"sentence-eng"`
+	SentenceTranslation string `json:"sentence-translation"`
+	SpeechSize          string `json:"speech-size"`
+	AlignedWords        struct {
+		Src struct {
+			Chars []struct {
+				S      string `json:"@s"`
+				E      string `json:"@e"`
+				Aligns struct {
+					Sc []struct {
+						Id string `json:"@id"`
+					} `json:"sc"`
+					Tc []struct {
+						Id string `json:"@id"`
+					} `json:"tc"`
+				} `json:"aligns"`
+				Id string `json:"@id"`
+			} `json:"chars"`
+		} `json:"src"`
+		Tran struct {
+			Chars []struct {
+				S      string `json:"@s"`
+				E      string `json:"@e"`
+				Aligns struct {
+					Sc []struct {
+						Id string `json:"@id"`
+					} `json:"sc"`
+					Tc []struct {
+						Id string `json:"@id"`
+					} `json:"tc"`
+				} `json:"aligns"`
+				Id string `json:"@id"`
+			} `json:"chars"`
+		} `json:"tran"`
+	} `json:"aligned-words"`
+	Source         string `json:"source"`
+	Url            string `json:"url"`
+	SentenceSpeech string `json:"sentence-speech"`
 }
