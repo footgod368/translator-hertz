@@ -4,6 +4,7 @@ package translator
 
 import (
 	"context"
+
 	translator "github.com/cloudwego/hertz-examples/bizdemo/hertz_gorm/biz/hertz_gen/translator"
 
 	"github.com/cloudwego/hertz/pkg/app"
@@ -21,6 +22,7 @@ func TranslateText(ctx context.Context, c *app.RequestContext) {
 	}
 
 	resp := new(translator.TranslateResponse)
+	resp.Translation = req.Text + "翻译"
 
 	c.JSON(200, resp)
 }
