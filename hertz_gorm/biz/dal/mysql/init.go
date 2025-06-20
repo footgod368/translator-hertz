@@ -17,6 +17,7 @@
 package mysql
 
 import (
+	"github.com/cloudwego/hertz-examples/bizdemo/hertz_gorm/biz/model"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -33,6 +34,10 @@ func Init() {
 		PrepareStmt:            true,
 		Logger:                 logger.Default.LogMode(logger.Info),
 	})
+	if err != nil {
+		panic(err)
+	}
+	err = DB.Migrator().AutoMigrate(&model.QueryRecord{})
 	if err != nil {
 		panic(err)
 	}

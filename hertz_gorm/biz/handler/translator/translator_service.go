@@ -6,6 +6,7 @@ import (
 	"context"
 
 	translator "github.com/cloudwego/hertz-examples/bizdemo/hertz_gorm/biz/hertz_gen/translator"
+	"github.com/cloudwego/hertz-examples/bizdemo/hertz_gorm/biz/service"
 
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/common/hlog"
@@ -23,8 +24,14 @@ func TranslateText(ctx context.Context, c *app.RequestContext) {
 		return
 	}
 
-	resp := new(translator.TranslateResponse)
-	resp.Translation = req.Text + "翻译"
+	// 记录查询记录
+	_ = service.CreateQueryRecord(ctx, req.Text, c.ClientIP(), string(c.UserAgent()))
 
+	// 翻译
+	resp, err := service.Translate(ctx, req)
+	if err != nil {
+		c.String(500, err.Error())
+		return
+	}
 	c.JSON(200, resp)
 }
