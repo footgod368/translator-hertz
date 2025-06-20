@@ -4,6 +4,7 @@ package translator
 
 import (
 	"context"
+	"github.com/cloudwego/hertz-examples/bizdemo/hertz_gorm/biz/service/complete"
 
 	translator "github.com/cloudwego/hertz-examples/bizdemo/hertz_gorm/biz/hertz_gen/translator"
 	"github.com/cloudwego/hertz-examples/bizdemo/hertz_gorm/biz/service"
@@ -45,7 +46,7 @@ func Complete(ctx context.Context, c *app.RequestContext) {
 		return
 	}
 
-	resp, err := service.Complete(ctx, req)
+	resp, err := complete.Complete(ctx, req)
 	if err != nil {
 		c.String(500, err.Error())
 		return
