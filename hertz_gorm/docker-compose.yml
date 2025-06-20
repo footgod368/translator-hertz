@@ -1,8 +1,9 @@
 version: '3'
 
+# Remove the version line at top
 services:
   mysql:
-    image: 'mysql:latest'
+    image: mysql:latest
     volumes:
       - ./biz/model/sql:/docker-entrypoint-initdb.d
     ports:
