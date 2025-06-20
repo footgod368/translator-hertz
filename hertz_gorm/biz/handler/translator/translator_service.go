@@ -8,11 +8,13 @@ import (
 	translator "github.com/cloudwego/hertz-examples/bizdemo/hertz_gorm/biz/hertz_gen/translator"
 
 	"github.com/cloudwego/hertz/pkg/app"
+	"github.com/cloudwego/hertz/pkg/common/hlog"
 )
 
 // TranslateText .
 // @router /v1/translate [GET]
 func TranslateText(ctx context.Context, c *app.RequestContext) {
+	hlog.CtxInfof(ctx, "Received translate request: %s", c.Request.Body())
 	var err error
 	var req translator.TranslateRequest
 	err = c.BindAndValidate(&req)
