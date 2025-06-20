@@ -26,8 +26,13 @@ import (
 
 func main() {
 	h := server.Default()
-	dal.Init()
-	log.Init()
 	register(h)
 	h.Spin()
+}
+
+func init() {
+	// 初始化数据库
+	dal.Init()
+	// 初始化日志
+	log.Init()
 }
