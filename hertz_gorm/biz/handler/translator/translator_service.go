@@ -72,3 +72,22 @@ func DuckSay(ctx context.Context, c *app.RequestContext) {
 	}
 	c.JSON(200, resp)
 }
+
+// Synonyms .
+// @router /v1/synonyms [GET]
+func Synonyms(ctx context.Context, c *app.RequestContext) {
+	var err error
+	var req translator.SynonymsRequest
+	err = c.BindAndValidate(&req)
+	if err != nil {
+		c.String(400, err.Error())
+		return
+	}
+
+	resp, err := service.Synonyms(ctx, req)
+	if err != nil {
+		c.String(500, err.Error())
+		return
+	}
+	c.JSON(200, resp)
+}

@@ -30,3 +30,8 @@ func _ducksayMw() []app.HandlerFunc {
 	// your code...
 	return nil
 }
+
+func _synonymsMw() []app.HandlerFunc {
+	// your code...
+	return nil
+}
