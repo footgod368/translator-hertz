@@ -9,5 +9,5 @@ struct TranslateResponse {
 }
 
 service TranslatorService {
-    TranslateResponse TranslateText(1: TranslateRequest req)
+    TranslateResponse TranslateText(1: TranslateRequest req) (api.get="/v1/translate")
 }
