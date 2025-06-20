@@ -15,13 +15,12 @@ struct EGSentence {
 }
 
 struct TranslateResponse {
-    1: string translation
-    2: string ukphone
-    3: string usphone
-    4: list<string> translations
-    5: list<string> word_forms
-    6: list<Etymology> etymologies
-    7: list<EGSentence> eg_sentences
+    1: string ukphone
+    2: string usphone
+    3: list<string> translations
+    4: list<string> word_forms
+    5: list<Etymology> etymologies
+    6: list<EGSentence> eg_sentences
 }
 
 service TranslatorService {

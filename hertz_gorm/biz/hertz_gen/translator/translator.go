@@ -516,13 +516,12 @@ func (p *EGSentence) String() string {
 }
 
 type TranslateResponse struct {
-	Translation  string        `thrift:"translation,1" json:"translation" form:"translation" query:"translation"`
-	Ukphone      string        `thrift:"ukphone,2" json:"ukphone" form:"ukphone" query:"ukphone"`
-	Usphone      string        `thrift:"usphone,3" json:"usphone" form:"usphone" query:"usphone"`
-	Translations []string      `thrift:"translations,4" json:"translations" form:"translations" query:"translations"`
-	WordForms    []string      `thrift:"word_forms,5" json:"word_forms" form:"word_forms" query:"word_forms"`
-	Etymologies  []*Etymology  `thrift:"etymologies,6" json:"etymologies" form:"etymologies" query:"etymologies"`
-	EgSentences  []*EGSentence `thrift:"eg_sentences,7" json:"eg_sentences" form:"eg_sentences" query:"eg_sentences"`
+	Ukphone      string        `thrift:"ukphone,1" json:"ukphone" form:"ukphone" query:"ukphone"`
+	Usphone      string        `thrift:"usphone,2" json:"usphone" form:"usphone" query:"usphone"`
+	Translations []string      `thrift:"translations,3" json:"translations" form:"translations" query:"translations"`
+	WordForms    []string      `thrift:"word_forms,4" json:"word_forms" form:"word_forms" query:"word_forms"`
+	Etymologies  []*Etymology  `thrift:"etymologies,5" json:"etymologies" form:"etymologies" query:"etymologies"`
+	EgSentences  []*EGSentence `thrift:"eg_sentences,6" json:"eg_sentences" form:"eg_sentences" query:"eg_sentences"`
 }
 
 func NewTranslateResponse() *TranslateResponse {
@@ -530,10 +529,6 @@ func NewTranslateResponse() *TranslateResponse {
 }
 
 func (p *TranslateResponse) InitDefault() {
-}
-
-func (p *TranslateResponse) GetTranslation() (v string) {
-	return p.Translation
 }
 
 func (p *TranslateResponse) GetUkphone() (v string) {
@@ -561,13 +556,12 @@ func (p *TranslateResponse) GetEgSentences() (v []*EGSentence) {
 }
 
 var fieldIDToName_TranslateResponse = map[int16]string{
-	1: "translation",
-	2: "ukphone",
-	3: "usphone",
-	4: "translations",
-	5: "word_forms",
-	6: "etymologies",
-	7: "eg_sentences",
+	1: "ukphone",
+	2: "usphone",
+	3: "translations",
+	4: "word_forms",
+	5: "etymologies",
+	6: "eg_sentences",
 }
 
 func (p *TranslateResponse) Read(iprot thrift.TProtocol) (err error) {
@@ -605,7 +599,7 @@ func (p *TranslateResponse) Read(iprot thrift.TProtocol) (err error) {
 				goto SkipFieldError
 			}
 		case 3:
-			if fieldTypeId == thrift.STRING {
+			if fieldTypeId == thrift.LIST {
 				if err = p.ReadField3(iprot); err != nil {
 					goto ReadFieldError
 				}
@@ -631,14 +625,6 @@ func (p *TranslateResponse) Read(iprot thrift.TProtocol) (err error) {
 		case 6:
 			if fieldTypeId == thrift.LIST {
 				if err = p.ReadField6(iprot); err != nil {
-					goto ReadFieldError
-				}
-			} else if err = iprot.Skip(fieldTypeId); err != nil {
-				goto SkipFieldError
-			}
-		case 7:
-			if fieldTypeId == thrift.LIST {
-				if err = p.ReadField7(iprot); err != nil {
 					goto ReadFieldError
 				}
 			} else if err = iprot.Skip(fieldTypeId); err != nil {
@@ -681,7 +667,7 @@ func (p *TranslateResponse) ReadField1(iprot thrift.TProtocol) error {
 	} else {
 		_field = v
 	}
-	p.Translation = _field
+	p.Ukphone = _field
 	return nil
 }
 func (p *TranslateResponse) ReadField2(iprot thrift.TProtocol) error {
@@ -692,21 +678,10 @@ func (p *TranslateResponse) ReadField2(iprot thrift.TProtocol) error {
 	} else {
 		_field = v
 	}
-	p.Ukphone = _field
-	return nil
-}
-func (p *TranslateResponse) ReadField3(iprot thrift.TProtocol) error {
-
-	var _field string
-	if v, err := iprot.ReadString(); err != nil {
-		return err
-	} else {
-		_field = v
-	}
 	p.Usphone = _field
 	return nil
 }
-func (p *TranslateResponse) ReadField4(iprot thrift.TProtocol) error {
+func (p *TranslateResponse) ReadField3(iprot thrift.TProtocol) error {
 	_, size, err := iprot.ReadListBegin()
 	if err != nil {
 		return err
@@ -729,7 +704,7 @@ func (p *TranslateResponse) ReadField4(iprot thrift.TProtocol) error {
 	p.Translations = _field
 	return nil
 }
-func (p *TranslateResponse) ReadField5(iprot thrift.TProtocol) error {
+func (p *TranslateResponse) ReadField4(iprot thrift.TProtocol) error {
 	_, size, err := iprot.ReadListBegin()
 	if err != nil {
 		return err
@@ -752,7 +727,7 @@ func (p *TranslateResponse) ReadField5(iprot thrift.TProtocol) error {
 	p.WordForms = _field
 	return nil
 }
-func (p *TranslateResponse) ReadField6(iprot thrift.TProtocol) error {
+func (p *TranslateResponse) ReadField5(iprot thrift.TProtocol) error {
 	_, size, err := iprot.ReadListBegin()
 	if err != nil {
 		return err
@@ -775,7 +750,7 @@ func (p *TranslateResponse) ReadField6(iprot thrift.TProtocol) error {
 	p.Etymologies = _field
 	return nil
 }
-func (p *TranslateResponse) ReadField7(iprot thrift.TProtocol) error {
+func (p *TranslateResponse) ReadField6(iprot thrift.TProtocol) error {
 	_, size, err := iprot.ReadListBegin()
 	if err != nil {
 		return err
@@ -829,10 +804,6 @@ func (p *TranslateResponse) Write(oprot thrift.TProtocol) (err error) {
 			fieldId = 6
 			goto WriteFieldError
 		}
-		if err = p.writeField7(oprot); err != nil {
-			fieldId = 7
-			goto WriteFieldError
-		}
 	}
 	if err = oprot.WriteFieldStop(); err != nil {
 		goto WriteFieldStopError
@@ -852,10 +823,10 @@ WriteStructEndError:
 }
 
 func (p *TranslateResponse) writeField1(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("translation", thrift.STRING, 1); err != nil {
+	if err = oprot.WriteFieldBegin("ukphone", thrift.STRING, 1); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteString(p.Translation); err != nil {
+	if err := oprot.WriteString(p.Ukphone); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -868,10 +839,10 @@ WriteFieldEndError:
 	return thrift.PrependError(fmt.Sprintf("%T write field 1 end error: ", p), err)
 }
 func (p *TranslateResponse) writeField2(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("ukphone", thrift.STRING, 2); err != nil {
+	if err = oprot.WriteFieldBegin("usphone", thrift.STRING, 2); err != nil {
 		goto WriteFieldBeginError
 	}
-	if err := oprot.WriteString(p.Ukphone); err != nil {
+	if err := oprot.WriteString(p.Usphone); err != nil {
 		return err
 	}
 	if err = oprot.WriteFieldEnd(); err != nil {
@@ -884,23 +855,7 @@ WriteFieldEndError:
 	return thrift.PrependError(fmt.Sprintf("%T write field 2 end error: ", p), err)
 }
 func (p *TranslateResponse) writeField3(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("usphone", thrift.STRING, 3); err != nil {
-		goto WriteFieldBeginError
-	}
-	if err := oprot.WriteString(p.Usphone); err != nil {
-		return err
-	}
-	if err = oprot.WriteFieldEnd(); err != nil {
-		goto WriteFieldEndError
-	}
-	return nil
-WriteFieldBeginError:
-	return thrift.PrependError(fmt.Sprintf("%T write field 3 begin error: ", p), err)
-WriteFieldEndError:
-	return thrift.PrependError(fmt.Sprintf("%T write field 3 end error: ", p), err)
-}
-func (p *TranslateResponse) writeField4(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("translations", thrift.LIST, 4); err != nil {
+	if err = oprot.WriteFieldBegin("translations", thrift.LIST, 3); err != nil {
 		goto WriteFieldBeginError
 	}
 	if err := oprot.WriteListBegin(thrift.STRING, len(p.Translations)); err != nil {
@@ -919,12 +874,12 @@ func (p *TranslateResponse) writeField4(oprot thrift.TProtocol) (err error) {
 	}
 	return nil
 WriteFieldBeginError:
-	return thrift.PrependError(fmt.Sprintf("%T write field 4 begin error: ", p), err)
+	return thrift.PrependError(fmt.Sprintf("%T write field 3 begin error: ", p), err)
 WriteFieldEndError:
-	return thrift.PrependError(fmt.Sprintf("%T write field 4 end error: ", p), err)
+	return thrift.PrependError(fmt.Sprintf("%T write field 3 end error: ", p), err)
 }
-func (p *TranslateResponse) writeField5(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("word_forms", thrift.LIST, 5); err != nil {
+func (p *TranslateResponse) writeField4(oprot thrift.TProtocol) (err error) {
+	if err = oprot.WriteFieldBegin("word_forms", thrift.LIST, 4); err != nil {
 		goto WriteFieldBeginError
 	}
 	if err := oprot.WriteListBegin(thrift.STRING, len(p.WordForms)); err != nil {
@@ -943,12 +898,12 @@ func (p *TranslateResponse) writeField5(oprot thrift.TProtocol) (err error) {
 	}
 	return nil
 WriteFieldBeginError:
-	return thrift.PrependError(fmt.Sprintf("%T write field 5 begin error: ", p), err)
+	return thrift.PrependError(fmt.Sprintf("%T write field 4 begin error: ", p), err)
 WriteFieldEndError:
-	return thrift.PrependError(fmt.Sprintf("%T write field 5 end error: ", p), err)
+	return thrift.PrependError(fmt.Sprintf("%T write field 4 end error: ", p), err)
 }
-func (p *TranslateResponse) writeField6(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("etymologies", thrift.LIST, 6); err != nil {
+func (p *TranslateResponse) writeField5(oprot thrift.TProtocol) (err error) {
+	if err = oprot.WriteFieldBegin("etymologies", thrift.LIST, 5); err != nil {
 		goto WriteFieldBeginError
 	}
 	if err := oprot.WriteListBegin(thrift.STRUCT, len(p.Etymologies)); err != nil {
@@ -967,12 +922,12 @@ func (p *TranslateResponse) writeField6(oprot thrift.TProtocol) (err error) {
 	}
 	return nil
 WriteFieldBeginError:
-	return thrift.PrependError(fmt.Sprintf("%T write field 6 begin error: ", p), err)
+	return thrift.PrependError(fmt.Sprintf("%T write field 5 begin error: ", p), err)
 WriteFieldEndError:
-	return thrift.PrependError(fmt.Sprintf("%T write field 6 end error: ", p), err)
+	return thrift.PrependError(fmt.Sprintf("%T write field 5 end error: ", p), err)
 }
-func (p *TranslateResponse) writeField7(oprot thrift.TProtocol) (err error) {
-	if err = oprot.WriteFieldBegin("eg_sentences", thrift.LIST, 7); err != nil {
+func (p *TranslateResponse) writeField6(oprot thrift.TProtocol) (err error) {
+	if err = oprot.WriteFieldBegin("eg_sentences", thrift.LIST, 6); err != nil {
 		goto WriteFieldBeginError
 	}
 	if err := oprot.WriteListBegin(thrift.STRUCT, len(p.EgSentences)); err != nil {
@@ -991,9 +946,9 @@ func (p *TranslateResponse) writeField7(oprot thrift.TProtocol) (err error) {
 	}
 	return nil
 WriteFieldBeginError:
-	return thrift.PrependError(fmt.Sprintf("%T write field 7 begin error: ", p), err)
+	return thrift.PrependError(fmt.Sprintf("%T write field 6 begin error: ", p), err)
 WriteFieldEndError:
-	return thrift.PrependError(fmt.Sprintf("%T write field 7 end error: ", p), err)
+	return thrift.PrependError(fmt.Sprintf("%T write field 6 end error: ", p), err)
 }
 
 func (p *TranslateResponse) String() string {
